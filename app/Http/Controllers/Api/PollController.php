@@ -188,4 +188,18 @@ class PollController extends Controller
         $poll->update(['is_closed' => true]);
         return response()->json(['message' => 'Poll closed']);
     }
+
+    public function getByCategory($id)
+    {
+        $polls = Poll::with('category')
+            ->where('category_id', $id)
+            ->latest()
+            ->get()
+            ->map(function ($poll) {
+                $poll->created_diff = $poll->created_at->diffForHumans();
+                return $poll;
+            });
+
+        return response()->json($polls);
+    }
 }

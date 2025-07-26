@@ -30,8 +30,7 @@ Route::get('/polls/active', [PollController::class, 'active']);
 Route::get('/polls/{id}', [PollController::class, 'show']);
 
 // Authenticated (passport) users only
-Route::middleware('auth:api')->group(function () {
-});
+Route::middleware('auth:api')->group(function () {});
 Route::post('/polls', [PollController::class, 'store']);
 Route::post('/polls/{id}/close', [PollController::class, 'closePoll']);
 
@@ -41,4 +40,4 @@ Route::post('/polls/vote', [VoteController::class, 'store']);
 Route::get('/polls/public/{public_id}', [PollController::class, 'publicPoll']);
 Route::get('/polls/{poll}/results', [PollController::class, 'results']);
 Route::post('/polls/{public_id}/vote', [VoteController::class, 'vote']);
-
+Route::get('/polls/category/{id}', [PollController::class, 'getByCategory']);
