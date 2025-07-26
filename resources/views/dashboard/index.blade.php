@@ -4,7 +4,16 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="text-primary">Welcome to PollsMaster</h3>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createPollModal">+ New Poll</button>
+            @auth
+                {{-- Show create poll form or modal --}}
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createPollModal">+ New Poll</button>
+            @else
+                {{-- Show login message --}}
+                <div class="alert alert-info">
+                    Want to create your own poll? <a href="{{ route('login') }}">Login</a> to get started!
+                </div>
+            @endauth
+
         </div>
 
         <!-- Categories Section -->

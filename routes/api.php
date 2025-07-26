@@ -25,14 +25,16 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/polls', [PollController::class, 'store']);
+    Route::post('/polls/{id}/close', [PollController::class, 'closePoll']);
+});
+
+
 Route::get('/polls', [PollController::class, 'index']);
 Route::get('/polls/active', [PollController::class, 'active']);
 Route::get('/polls/{id}', [PollController::class, 'show']);
-
-// Authenticated (passport) users only
-Route::middleware('auth:api')->group(function () {});
-Route::post('/polls', [PollController::class, 'store']);
-Route::post('/polls/{id}/close', [PollController::class, 'closePoll']);
 
 Route::post('/polls/vote', [VoteController::class, 'store']);
 
