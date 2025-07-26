@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('head')
+    {{-- Allow guest access explicitly --}}
+    <script>
+        window.allowGuestPage = true;
+    </script>
+@endsection
+
 @section('content')
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -40,6 +47,15 @@
 
 @push('scripts')
     <script>
+        // 🔐 Block access to this page if user already logged in
+        (function() {
+            const token = localStorage.getItem("access_token");
+            if (token) {
+                window.location.href = "/dashboard";
+            }
+        })();
+
+        // 📝 Submit registration form
         $(document).ready(function() {
             $('#registerForm').on('submit', function(e) {
                 e.preventDefault();
@@ -52,9 +68,8 @@
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        localStorage.setItem('access_token', response.access_token);
-                        window.location.href =
-                        '/dashboard'; // Redirect after successful registration
+                        // ✅ Instead of auto-login, redirect to login page
+                        window.location.href = '/login?registered=1';
                     },
                     error: function(xhr) {
                         let message = 'Registration failed. Please try again.';
