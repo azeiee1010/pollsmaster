@@ -38,7 +38,7 @@
          // Redirect to login if no token and not allowed guest access
         (function() {
             const token = localStorage.getItem("access_token");
-            const allowGuest = window.allowGuestPage || false;
+            const allowGuest = window.allowGuestPage || true;
 
             if (!token && !allowGuest) {
                 window.location.href = "/login";
