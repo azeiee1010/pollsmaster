@@ -29,6 +29,12 @@
                         <h6 class="fw-bold">{{ $poll->question }}</h6>
                         <p class="mb-1 text-muted">{{ $poll->description }}</p>
                         <span class="badge bg-info">{{ $poll->category->name ?? 'No Category' }}</span>
+
+                        <div class="mt-3 text-end">
+                            <a href="{{ url('/polls/view/' . $poll->public_id) }}" class="btn btn-sm btn-primary">
+                                View & Vote
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty
@@ -37,6 +43,7 @@
                 </div>
             @endforelse
         </div>
+
     </div>
 
     @include('dashboard.partials.create_poll_modal')
@@ -113,6 +120,11 @@
                         showToast(message, false);
                     }
                 });
+            });
+
+            $('.view-category-polls').on('click', function() {
+                var categoryId = $(this).data('id');
+                window.location.href = '/polls/category/' + categoryId;
             });
         });
     </script>
