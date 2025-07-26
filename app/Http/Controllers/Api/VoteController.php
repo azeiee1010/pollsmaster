@@ -3,53 +3,63 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Option;
 use App\Models\Poll;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VoteController extends Controller
 {
-    public function store(Request $request)
+    public function vote(Request $request)
     {
         $validated = $request->validate([
-            'poll_id' => 'required|exists:polls,id',
-            'option'  => 'required|string',
+            'option_id' => 'required|exists:options,id',
         ]);
 
-        $poll = Poll::findOrFail($validated['poll_id']);
+        // Fetch the selected option with its poll
+        $option = Option::with('poll')->findOrFail($validated['option_id']);
+        $poll = $option->poll;
 
-        // Check poll expiration
+        // Check if poll is expired
         if ($poll->expires_at && $poll->expires_at < now()) {
             return response()->json(['error' => 'This poll has expired'], 403);
         }
 
-        // Check if the option is valid
-        if (!in_array($validated['option'], $poll->options)) {
-            return response()->json(['error' => 'Invalid option selected'], 422);
-        }
-
+        // Use IP for duplicate check
         $voterIp = $request->ip();
 
-        // Prevent duplicate votes by IP
-        $alreadyVoted = Vote::where('poll_id', $poll->id)
-            ->where('voter_ip', $voterIp)
-            ->exists();
+        // Attempt to insert the vote (catch duplicate using DB constraint)
+        try {
+            DB::transaction(function () use ($poll, $option, $voterIp) {
+                Vote::create([
+                    'poll_id'   => $poll->id,
+                    'option_id' => $option->id,
+                    'voter_ip'  => $voterIp,
+                    'user_id'   => auth()->id(), // null if guest
+                ]);
 
-        if ($alreadyVoted) {
-            return response()->json(['error' => 'You have already voted in this poll'], 403);
+                // Increment option vote count
+                $option->increment('votes_count');
+            });
+        } catch (\Illuminate\Database\QueryException $e) {
+            if (str_contains($e->getMessage(), 'votes_poll_id_voter_ip_unique')) {
+                return response()->json(['error' => 'You have already voted in this poll'], 403);
+            }
+            return response()->json(['error' => 'Vote failed.'], 500);
         }
 
-        // Create the vote
-        $vote = Vote::create([
-            'poll_id'  => $poll->id,
-            'option'   => $validated['option'],
-            'voter_ip' => $voterIp,
-            'user_id'  => auth()->check() ? auth()->id() : null,
-        ]);
+        // Return updated poll results
+        $options = Option::where('poll_id', $poll->id)->get(['text', 'votes_count']);
 
         return response()->json([
             'message' => 'Vote submitted successfully',
-            'vote'    => $vote,
+            'results' => $options->map(function ($opt) {
+                return [
+                    'option' => $opt->text,
+                    'votes'  => $opt->votes_count,
+                ];
+            })
         ], 201);
     }
 }

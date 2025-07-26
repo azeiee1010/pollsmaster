@@ -1,0 +1,12 @@
+.category-item {
+    cursor: pointer;
+}
+
+.category-item:hover {
+    background-color: #f0f0f0;
+}
+
+.category-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
