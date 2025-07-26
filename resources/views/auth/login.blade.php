@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('head')
+    <script>
+        window.allowGuestPage = true;
+    </script>
+@endsection
 @section('content')
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -32,6 +36,11 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Redirect to dashboard if token already exists
+            if (localStorage.getItem('access_token')) {
+                window.location.href = '/dashboard';
+            }
+
             $('#loginForm').on('submit', function(e) {
                 e.preventDefault(); // Prevent default behavior
                 $('#login-error').text('');

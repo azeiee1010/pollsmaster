@@ -11,6 +11,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @yield('head')
 </head>
 
 <body>
@@ -30,11 +31,25 @@
     <script>
         $.ajaxSetup({
             headers: {
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                Authorization: 'Bearer ' + localStorage.getItem('access_token')
             }
         });
+
+         // Redirect to login if no token and not allowed guest access
+        (function() {
+            const token = localStorage.getItem("access_token");
+            const allowGuest = window.allowGuestPage || false;
+
+            if (!token && !allowGuest) {
+                window.location.href = "/login";
+            }
+        })();
+        
+
     </script>
+    {{-- <script src="{{ asset('assets/js/auth-guard.js') }}"></script> --}}
+
+
 
     <!-- Blade stack scripts (e.g. @push('scripts')) -->
         @stack('scripts')

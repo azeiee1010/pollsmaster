@@ -1,19 +1,22 @@
 @extends('layouts.app')
-
+@section('head')
+    <script>
+        window.allowGuestPage = true;
+    </script>
+@endsection
 @section('content')
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="text-primary">Welcome to PollsMaster</h3>
-            @auth
-                {{-- Show create poll form or modal --}}
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createPollModal">+ New Poll</button>
-            @else
-                {{-- Show login message --}}
-                <div class="alert alert-info">
-                    Want to create your own poll? <a href="{{ route('login') }}">Login</a> to get started!
-                </div>
-            @endauth
 
+            <div id="auth-section" class="d-none">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createPollModal">+ New Poll</button>
+                <button id="logoutBtn" class="btn btn-danger">Logout</button>
+            </div>
+
+            <div id="guest-section" class="alert alert-info d-none">
+                Want to create your own poll? <a href="/login">Login</a> to get started!
+            </div>
         </div>
 
         <!-- Categories Section -->
@@ -59,7 +62,6 @@
 @endsection
 
 @push('scripts')
-    {{-- <script src="{{ asset('js/dashboard.js') }}"></script> --}}
     <script>
         $(document).ready(function() {
             let optionCount = 2;
@@ -134,6 +136,22 @@
             $('.view-category-polls').on('click', function() {
                 var categoryId = $(this).data('id');
                 window.location.href = '/polls/category/' + categoryId;
+            });
+
+            const token = localStorage.getItem('access_token');
+
+            if (token) {
+                $('#auth-section').removeClass('d-none');
+                $('#guest-section').addClass('d-none');
+            } else {
+                $('#auth-section').addClass('d-none');
+                $('#guest-section').removeClass('d-none');
+            }
+
+            // Logout handler
+            $('#logoutBtn').on('click', function() {
+                localStorage.removeItem('access_token');
+                window.location.href = '/login';
             });
         });
     </script>
