@@ -31,7 +31,7 @@
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card shadow-sm h-100 border-start border-4 border-primary">
                                 <div class="card-body">
-                                    <h5 class="card-title">${poll.title}</h5>
+                                    <h5 class="card-title">${poll.question}</h5>
                                     <p class="card-text text-muted">Category: <strong>${poll.category.name}</strong></p>
                                     <p class="card-text">
                                         <small class="text-muted">Created: ${poll.created_diff}</small>

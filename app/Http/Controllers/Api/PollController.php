@@ -37,7 +37,7 @@ class PollController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title'         => 'required|string|max:255',
+            'question'         => 'required|string|max:255',
             'description'   => 'nullable|string',
             'category_id'   => 'nullable|exists:categories,id',
             'is_anonymous'  => 'nullable|boolean',
@@ -58,7 +58,7 @@ class PollController extends Controller
             $poll = Poll::create([
                 'user_id'      => Auth::id() ?? 1,
                 'category_id'  => $request->category_id,
-                'title'        => $request->title,
+                'question'        => $request->question,
                 'description'  => $request->description,
                 'is_anonymous' => $request->boolean('is_anonymous') ?? true,
                 'expires_at'   => $request->expires_at ?? now()->addDays(7),
@@ -129,7 +129,7 @@ class PollController extends Controller
         $response =  response()->json([
             'poll' => [
                 'id' => $poll->id,
-                'question' => $poll->title,
+                'question' => $poll->question,
             ],
             'results' => $results,
         ]);
@@ -166,7 +166,7 @@ class PollController extends Controller
 
         return response()->json([
             'poll' => [
-                'question'    => $poll->title,
+                'question'    => $poll->question,
                 'description' => $poll->description,
                 'is_active'   => $poll->is_active,
                 'created_at'  => $poll->created_at,

@@ -18,7 +18,7 @@ class CreatePollsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
 
-            $table->string('title');
+            $table->string('question');
             $table->text('description')->nullable();
 
             $table->boolean('is_anonymous')->default(false); // Allow anonymous votes

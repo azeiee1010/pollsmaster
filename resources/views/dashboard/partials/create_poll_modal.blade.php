@@ -12,7 +12,7 @@
                     <!-- Question -->
                     <div class="mb-3">
                         <label class="form-label">Question</label>
-                        <input type="text" name="title" class="form-control" placeholder="Enter your poll question"
+                        <input type="text" name="question" class="form-control" placeholder="Enter your poll question"
                             required>
                     </div>
 

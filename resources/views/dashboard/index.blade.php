@@ -26,7 +26,7 @@
             @forelse($polls as $poll)
                 <div class="col-md-6">
                     <div class="card mb-3 p-3 shadow-sm">
-                        <h6 class="fw-bold">{{ $poll->title }}</h6>
+                        <h6 class="fw-bold">{{ $poll->question }}</h6>
                         <p class="mb-1 text-muted">{{ $poll->description }}</p>
                         <span class="badge bg-info">{{ $poll->category->name ?? 'No Category' }}</span>
                     </div>

@@ -13,7 +13,7 @@ class Poll extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'title',
+        'question',
         'description',
         'is_anonymous',
         'is_closed',
