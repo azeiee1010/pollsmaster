@@ -14,7 +14,9 @@
 @push('scripts')
     <script>
         const publicId = "{{ $public_id }}";
-        const baseUrl = "{{ url('/') }}";
+        // const baseUrl = "{{ url('/') }}";
+        //const baseUrl = "https://35833887c2b1.ngrok-free.app";
+        const baseUrl = window.location.origin;
         const csrfToken = "{{ csrf_token() }}";
 
         $(document).ready(function() {
