@@ -450,6 +450,14 @@
         .category-travel .category-icon::before {
             content: "✈️";
         }
+
+        .clamp-4-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 @endsection
 
@@ -504,14 +512,15 @@
             @forelse($polls as $poll)
                 <div class="col-md-6">
                     <div class="glass-card poll-card">
-                        <h6 class="poll-question">{{ $poll->question }}</h6>
-                        <p class="poll-description">{{ $poll->description }}</p>
-                        <span class="poll-badge">
-                            <i class="fas fa-tag me-1"></i>
-                            {{ $poll->category->name ?? 'No Category' }}
-                        </span>
+                        <h6 class="poll-question clamp-4-lines">{{ $poll->question }}</h6>
+                        <p class="poll-description clamp-4-lines">{{ $poll->description }}</p>
 
-                        <div class="text-end">
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="poll-badge">
+                                <i class="fas fa-tag me-1"></i>
+                                {{ $poll->category->name ?? 'No Category' }}
+                            </span>
+
                             <a href="{{ url('/polls/view/' . $poll->public_id) }}" class="btn btn-glass btn-primary-glass">
                                 <i class="fas fa-poll"></i> View & Vote
                             </a>
