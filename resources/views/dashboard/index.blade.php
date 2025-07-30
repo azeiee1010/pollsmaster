@@ -258,6 +258,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             overflow: hidden;
+            max-height: 250px;
         }
 
         .poll-card::after {
@@ -294,7 +295,6 @@
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 1rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -473,6 +473,9 @@
             <div id="auth-section" class="auth-buttons d-none">
                 <button class="btn btn-glass btn-success-glass" data-bs-toggle="modal" data-bs-target="#createPollModal">
                     <i class="fas fa-plus"></i> New Poll
+                </button>
+                <button id="myPoll" class="btn btn-glass btn-teal-glass">
+                    <i class="fas fa-list"></i> My Poll
                 </button>
                 <button id="logoutBtn" class="btn btn-glass btn-danger-glass">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -663,6 +666,11 @@
             $('#logoutBtn').on('click', function() {
                 localStorage.removeItem('access_token');
                 window.location.href = '/login';
+            });
+
+            // my poll handler
+            $('#myPoll').on('click', function() {
+                window.location.href = '/polls/user';
             });
         });
     </script>

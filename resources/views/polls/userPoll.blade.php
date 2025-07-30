@@ -9,9 +9,9 @@
     <div class="container mt-5">
         <!-- Header Section -->
         <div class="header-section fade-in">
-            <h1 class="main-title">Category Polls</h1>
+            <h1 class="main-title">My Polls</h1>
             <p class="lead text-white text-center mb-4" style="font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-                Discover and participate in polls from your selected category
+                Discover and participate in polls from your polls created
             </p>
 
             <!-- Loading Indicator -->
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Polls Container -->
-        <div class="row" id="pollListByCategory">
+        <div class="row" id="pollListByUser">
             <!-- Polls will be loaded here -->
         </div>
 
@@ -34,7 +34,7 @@
         <div class="text-center mt-5 fade-in">
             <a href="{{ route('dashboard') }}" class="btn-glass btn-primary-glass">
                 <i class="fas fa-arrow-left"></i>
-                Back to Categories
+                Back to Dashboard
             </a>
         </div>
     </div>
@@ -489,19 +489,17 @@
             // Initialize particles
             createParticles();
 
-            const categoryId = '{{ $categoryId }}';
-
             // Add staggered animation delay
             let animationDelay = 0;
 
             $.ajax({
-                url: `/api/polls/category/${categoryId}`,
+                url: `/api/polls/user`,
                 method: 'GET',
                 success: function(response) {
                     // Hide loading spinner
                     $('#loadingSpinner').fadeOut(300);
 
-                    const container = $('#pollListByCategory');
+                    const container = $('#pollListByUser');
                     container.empty();
 
                     if (response.length === 0) {
@@ -531,7 +529,7 @@
                                     <i class="fas fa-clock"></i>
                                     Created ${poll.created_diff}
                                 </div>
-                                <a href="/polls/view/${poll.public_id}" 
+                                <a href="/polls/view/${poll.public_id}"
                                    class="view-btn"
                                    onclick="event.stopPropagation();">
                                     View & Vote
@@ -558,7 +556,7 @@
                         </button>
                     </div>
                 </div>`;
-                    $('#pollListByCategory').html(errorStateHtml);
+                    $('#pollListByUser').html(errorStateHtml);
                 }
             });
         });

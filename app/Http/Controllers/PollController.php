@@ -12,4 +12,9 @@ class PollController extends Controller
     {
         return view('polls.category', ['categoryId' => $id]);
     }
+
+    public function userPollPage()
+    {
+        return view('polls.userPoll');
+    }
 }

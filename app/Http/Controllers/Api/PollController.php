@@ -202,4 +202,19 @@ class PollController extends Controller
 
         return response()->json($polls);
     }
+
+    public function getByUser()
+    {
+        $id = Auth::user()->id;
+        $polls = Poll::with('category')
+            ->where('user_id', $id)
+            ->latest()
+            ->get()
+            ->map(function ($poll) {
+                $poll->created_diff = $poll->created_at->diffForHumans();
+                return $poll;
+            });
+
+        return response()->json($polls);
+    }
 }
