@@ -7,15 +7,48 @@
     </script>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --poll-gradient: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
-            --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --input-glass: rgba(255, 255, 255, 0.1);
-            --text-primary: #2c3e50;
-            --card-shadow: 0 15px 35px rgba(31, 38, 135, 0.37);
+            /* Modern soft color palette - matching login */
+            --primary-color: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f1f5f9;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+
+            /* Background colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+
+            /* Text colors */
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --text-white: #ffffff;
+
+            /* Gradients */
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --poll-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #8b5cf6 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --danger-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+
+            /* Glass morphism with softer colors */
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+            /* Border and shadow */
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
+        /* Add Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
@@ -24,8 +57,8 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #ff6b6b 50%, #4ecdc4 75%, #45b7d1 100%);
+            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%, #f8fafc 100%);
             background-size: 400% 400%;
             animation: gradientFlow 20s ease infinite;
             min-height: 100vh;
@@ -50,7 +83,7 @@
             }
         }
 
-        /* Floating particles background */
+        /* Animated Background Particles - matching login */
         .particles {
             position: fixed;
             top: 0;
@@ -63,22 +96,18 @@
 
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(99, 102, 241, 0.1);
             border-radius: 50%;
-            animation: float 10s ease-in-out infinite;
+            animation: float 8s ease-in-out infinite;
         }
 
         .particle:nth-child(odd) {
             animation-direction: reverse;
-            background: rgba(255, 107, 107, 0.1);
+            background: rgba(139, 92, 246, 0.08);
         }
 
         .particle:nth-child(3n) {
-            background: rgba(78, 205, 196, 0.1);
-        }
-
-        .particle:nth-child(4n) {
-            background: rgba(69, 183, 209, 0.1);
+            background: rgba(6, 182, 212, 0.08);
         }
 
         @keyframes float {
@@ -89,11 +118,11 @@
             }
 
             33% {
-                transform: translateY(-50px) rotate(120deg);
+                transform: translateY(-40px) rotate(120deg);
             }
 
             66% {
-                transform: translateY(-100px) rotate(240deg);
+                transform: translateY(-80px) rotate(240deg);
             }
         }
 
@@ -103,12 +132,12 @@
             z-index: 2;
         }
 
-        /* Register card styling - Same as login */
+        /* Register card styling - matching login */
         .register-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 25px;
+            border-radius: 20px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
             transform: translateY(0);
@@ -129,14 +158,15 @@
         }
 
         .register-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(31, 38, 135, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* Header styling - Same as login */
+        /* Header styling - matching login */
         .register-header {
             background: var(--poll-gradient);
-            padding: 2rem;
+            padding: 3rem 2rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -153,124 +183,171 @@
         }
 
         .register-title {
-            font-size: 2.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
             font-weight: 800;
             color: white;
             margin: 0;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
+            letter-spacing: -0.02em;
+            animation: titleFloat 6s ease-in-out infinite;
         }
 
-        .register-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .register-icon {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 1rem;
-            animation: iconBounce 2s infinite;
-        }
-
-        @keyframes iconBounce {
+        @keyframes titleFloat {
 
             0%,
-            20%,
-            50%,
-            80%,
             100% {
-                transform: translateY(0);
+                transform: translateY(0px);
             }
 
-            40% {
-                transform: translateY(-10px);
-            }
-
-            60% {
+            50% {
                 transform: translateY(-5px);
             }
         }
 
-        /* Form body styling - Same as login */
-        .register-body {
-            padding: 2.5rem;
+        .register-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.8rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
         }
 
-        /* Form controls - Same as login */
+        .register-icon {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: iconPulse 2s infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes iconPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Form body styling - matching login */
+        .register-body {
+            padding: 3rem 2.5rem 2.5rem;
+        }
+
+        /* Welcome message - matching login */
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .welcome-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Form controls - matching login */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             position: relative;
         }
 
         .form-label {
-            color: white;
+            color: var(--text-primary);
             font-weight: 600;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             display: block;
             font-size: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
         }
 
         .form-control-glass {
-            background: var(--input-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 1rem 1.2rem;
-            color: white;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1rem 3.5rem 1rem 1.2rem;
+            color: var(--text-primary);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-sm);
         }
 
         .form-control-glass::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
         }
 
         .form-control-glass:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), var(--shadow-md);
+            background: var(--bg-primary);
             transform: translateY(-2px);
         }
 
-        /* Input icons - Same as login */
+        .form-control-glass:focus::placeholder {
+            color: var(--text-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Input icons - matching login */
         .input-icon {
             position: absolute;
-            right: 1rem;
+            right: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-muted);
             font-size: 1.1rem;
             pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within .input-icon {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .input-wrapper {
             position: relative;
         }
 
-        /* Submit button - Same as login but green */
+        /* Submit button - green version of login button */
         .btn-register {
+            font-family: 'Poppins', sans-serif;
             background: var(--success-gradient);
             border: none;
-            border-radius: 15px;
-            padding: 1rem 2rem;
-            color: white;
-            font-weight: 700;
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            color: var(--text-white);
+            font-weight: 600;
             font-size: 1.1rem;
             width: 100%;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 1rem;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-register::before {
@@ -280,8 +357,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
         }
 
         .btn-register:hover::before {
@@ -289,72 +366,70 @@
         }
 
         .btn-register:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            color: white;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+            color: var(--text-white);
         }
 
         .btn-register:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.01);
+            transition: transform 0.1s;
         }
 
-        /* Error message styling - Same as login */
+        /* Error message styling - matching login */
         .error-message {
-            background: rgba(255, 107, 107, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
-            color: #ff6b6b;
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            color: var(--danger-color);
             font-weight: 600;
-            margin-bottom: 1rem;
-            animation: shake 0.5s ease-in-out;
+            margin-bottom: 1.5rem;
+            animation: errorSlide 0.5s ease-out;
+            font-family: 'Poppins', sans-serif;
         }
 
-        @keyframes shake {
+        @keyframes errorSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
 
-            0%,
-            100% {
+            to {
+                opacity: 1;
                 transform: translateX(0);
             }
-
-            25% {
-                transform: translateX(-5px);
-            }
-
-            75% {
-                transform: translateX(5px);
-            }
         }
 
-        /* Login link - Same styling as register link in login */
+        /* Login link - matching register link in login */
         .login-link {
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .login-link p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             margin: 0;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
         }
 
         .login-link a {
-            color: white;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 700;
-            background: var(--poll-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             transition: all 0.3s ease;
             position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .login-link a:hover {
+            color: var(--primary-dark);
             transform: translateY(-2px);
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .login-link a::after {
@@ -372,7 +447,7 @@
             width: 100%;
         }
 
-        /* Loading state - Same as login */
+        /* Loading state - matching login */
         .btn-loading {
             position: relative;
             color: transparent !important;
@@ -403,19 +478,45 @@
             }
         }
 
-        /* Responsive design - Same as login */
+        /* Loading animations - matching login */
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .fade-in:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design - matching login */
         @media (max-width: 768px) {
             .register-card {
                 margin: 1rem;
-                border-radius: 20px;
+                border-radius: 16px;
             }
 
             .register-header {
-                padding: 1.5rem;
+                padding: 2rem 1.5rem 1.5rem;
             }
 
             .register-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .register-body {
@@ -423,20 +524,23 @@
             }
 
             .register-icon {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+
+            .form-control-glass {
+                padding: 1rem 3rem 1rem 1rem;
             }
         }
 
-        /* Welcome message - Same as login */
-        .welcome-message {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
+        @media (max-width: 480px) {
+            .register-title {
+                font-size: 1.8rem;
+            }
 
-        .welcome-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            line-height: 1.6;
+            .btn-register {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
 @endsection
@@ -458,18 +562,18 @@
                     </div>
 
                     <div class="register-body">
-                        <div class="welcome-message">
+                        <div class="welcome-message fade-in">
                             <p class="welcome-text">
-                                <i class="fas fa-chart-pie me-2"></i>
+                                <i class="fas fa-chart-pie me-2" style="color: var(--primary-color);"></i>
                                 Ready to create amazing polls and vote on others?
                             </p>
                         </div>
 
-                        <form id="registerForm">
+                        <form id="registerForm" class="fade-in">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">
-                                    <i class="fas fa-user me-2"></i>Name
+                                    <i class="fas fa-user me-2" style="color: var(--primary-color);"></i>Name
                                 </label>
                                 <div class="input-wrapper">
                                     <input type="text" name="name" class="form-control form-control-glass"
@@ -480,7 +584,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <i class="fas fa-envelope me-2"></i>Email Address
+                                    <i class="fas fa-envelope me-2" style="color: var(--primary-color);"></i>Email Address
                                 </label>
                                 <div class="input-wrapper">
                                     <input type="email" name="email" class="form-control form-control-glass"
@@ -491,7 +595,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <i class="fas fa-lock me-2"></i>Password
+                                    <i class="fas fa-lock me-2" style="color: var(--primary-color);"></i>Password
                                 </label>
                                 <div class="input-wrapper">
                                     <input type="password" name="password" class="form-control form-control-glass"
@@ -502,7 +606,8 @@
 
                             <div class="form-group">
                                 <label class="form-label">
-                                    <i class="fas fa-check-double me-2"></i>Password Confirmation
+                                    <i class="fas fa-check-double me-2" style="color: var(--primary-color);"></i>Password
+                                    Confirmation
                                 </label>
                                 <div class="input-wrapper">
                                     <input type="password" name="password_confirmation"
@@ -515,15 +620,15 @@
                             <div id="register-error" class="error-message d-none"></div>
 
                             <button type="submit" class="btn btn-register">
-                                <i class="fas fa-user-plus me-2"></i>
-                                Register
+                                <i class="fas fa-user-plus"></i>
+                                Create Account
                             </button>
 
                             <div class="login-link">
                                 <p>
                                     Already have an account?
                                     <a href="{{ route('login') }}">
-                                        <i class="fas fa-sign-in-alt me-1"></i>Login
+                                        <i class="fas fa-sign-in-alt"></i>Sign In
                                     </a>
                                 </p>
                             </div>
@@ -537,17 +642,17 @@
 
 @push('scripts')
     <script>
-        // Create floating particles
+        // Create floating particles - matching login
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 40;
+            const particleCount = 60;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
 
-                // Random size between 8px and 20px
-                const size = Math.random() * 12 + 8;
+                // Random size between 6px and 16px
+                const size = Math.random() * 10 + 6;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
 
@@ -556,8 +661,8 @@
                 particle.style.top = Math.random() * 100 + '%';
 
                 // Random animation duration
-                particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
-                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                particle.style.animationDelay = Math.random() * 3 + 's';
 
                 particlesContainer.appendChild(particle);
             }
@@ -597,7 +702,12 @@
                     success: function(response) {
                         // Success feedback
                         $submitBtn.removeClass('btn-loading').html(
-                            '<i class="fas fa-check me-2"></i>Success!');
+                            '<i class="fas fa-check me-2"></i>Success!'
+                        ).css({
+                            'background': 'var(--success-gradient)',
+                            'transform': 'translateY(-4px) scale(1.02)',
+                            'box-shadow': '0 15px 35px rgba(16, 185, 129, 0.4)'
+                        });
 
                         setTimeout(() => {
                             // ✅ Instead of auto-login, redirect to login page
@@ -616,19 +726,53 @@
 
                         // Remove loading state
                         $submitBtn.removeClass('btn-loading').prop('disabled', false)
-                            .html('<i class="fas fa-user-plus me-2"></i>Register');
+                            .html('<i class="fas fa-user-plus me-2"></i>Create Account');
+
+                        // Add shake animation
+                        $('.register-card').css('animation', 'shake 0.6s ease-in-out');
+                        setTimeout(() => {
+                            $('.register-card').css('animation',
+                                'slideInUp 0.8s ease-out');
+                        }, 600);
                     }
                 });
             });
 
-            // Add input focus effects
+            // Enhanced input focus effects - matching login
             $('.form-control-glass').on('focus', function() {
-                $(this).closest('.form-group').find('.form-label').css('color', '#ffffff');
+                $(this).closest('.form-group').find('.form-label')
+                    .css('color', 'var(--primary-color)')
+                    .css('transform', 'translateY(-2px)');
             });
 
             $('.form-control-glass').on('blur', function() {
-                $(this).closest('.form-group').find('.form-label').css('color', 'rgba(255, 255, 255, 0.9)');
+                $(this).closest('.form-group').find('.form-label')
+                    .css('color', 'var(--text-primary)')
+                    .css('transform', 'translateY(0)');
             });
+
+            // Add hover effects to buttons - matching login
+            $('.btn-register').hover(
+                function() {
+                    $(this).find('i').addClass('fa-bounce');
+                },
+                function() {
+                    $(this).find('i').removeClass('fa-bounce');
+                }
+            );
         });
+
+        // Add shake animation keyframes
+        const shakeKeyframes = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0) translateY(-8px); }
+                25% { transform: translateX(-10px) translateY(-8px); }
+                75% { transform: translateX(10px) translateY(-8px); }
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = shakeKeyframes;
+        document.head.appendChild(styleSheet);
     </script>
 @endpush

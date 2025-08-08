@@ -103,3 +103,190 @@
         </div>
     </div>
 @endforelse
+
+<style>
+    /* Poll Card Hover Effects */
+    .poll-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .poll-card:hover .poll-glow {
+        opacity: 1;
+    }
+
+    .poll-card:hover .hover-overlay {
+        opacity: 1;
+    }
+
+    .poll-card:hover .click-indicator i {
+        transform: translateX(5px);
+    }
+
+    .poll-card:hover .vote-badge {
+        transform: scale(1.05);
+    }
+
+    /* Pulse Animation for Eye Icon */
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+    }
+
+    /* Additional smooth transitions */
+    .poll-card {
+        will-change: transform;
+    }
+
+    .poll-card * {
+        transition: inherit;
+    }
+
+    /* Ensure proper stacking and smooth hover */
+    .hover-overlay {
+        backdrop-filter: blur(2px);
+    }
+
+    /* Vote badge hover animation */
+    .vote-badge:hover {
+        animation: voteBadgeBounce 0.6s ease-in-out;
+    }
+
+    @keyframes voteBadgeBounce {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    /* Category badge subtle hover */
+    .poll-card:hover .badge {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Enhanced card body content spacing on hover */
+    .poll-card:hover .card-body {
+        transform: translateZ(10px);
+    }
+
+    /* Smooth gradient border animation */
+    .poll-card:hover>div:first-child {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #667eea 100%);
+        background-size: 200% 200%;
+        animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Empty state hover effect */
+    .alert:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .poll-card:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .poll-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .poll-card .card-title {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .poll-card {
+            border-radius: 16px;
+        }
+
+        .poll-card>div:first-child,
+        .poll-glow,
+        .hover-overlay {
+            border-radius: 16px;
+        }
+
+        .poll-card>div:first-child>div {
+            border-radius: 14px;
+        }
+    }
+
+    /* Focus accessibility */
+    .poll-card:focus-visible {
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    }
+
+    /* Smooth loading animation for cards */
+    .poll-card {
+        animation: cardFadeIn 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .poll-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .poll-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .poll-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .poll-card:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .poll-card:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .poll-card:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    @keyframes cardFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
