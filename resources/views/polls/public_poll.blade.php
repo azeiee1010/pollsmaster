@@ -141,7 +141,7 @@
             animation: slideInUp 0.8s ease-out;
             max-width: 800px;
             width: 100%;
-            margin: 1rem;
+            margin: 1rem auto;
         }
 
         .poll-card:hover {
