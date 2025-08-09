@@ -658,7 +658,7 @@
                         <div class="category-icon"></div>
                         <h5>{{ $category->name }}</h5>
                         <button class="btn btn-glass btn-primary-glass view-category-polls" data-id="{{ $category->id }}">
-                            <i class="fas fa-chart-bar"></i> View Polls
+                            <i class="fas fa-chart-bar"></i> View
                         </button>
                     </div>
                 </div>
@@ -683,7 +683,7 @@
                             </span>
 
                             <a href="{{ url('/polls/view/' . $poll->public_id) }}" class="btn btn-glass btn-primary-glass">
-                                <i class="fas fa-poll"></i> View & Vote
+                                <i class="fas fa-poll"></i> Vote
                             </a>
                         </div>
                     </div>
