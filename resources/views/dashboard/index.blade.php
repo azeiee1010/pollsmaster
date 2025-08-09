@@ -606,9 +606,9 @@
         }
 
         /* Text clamping utility */
-        .clamp-4-lines {
+        .clamp-2-lines {
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -673,8 +673,8 @@
             @forelse($polls as $poll)
                 <div class="col-md-6">
                     <div class="glass-card poll-card">
-                        <h6 class="poll-question clamp-4-lines">{{ $poll->question }}</h6>
-                        <p class="poll-description clamp-4-lines">{{ $poll->description }}</p>
+                        <h6 class="poll-question clamp-2-lines">{{ $poll->question }}</h6>
+                        <p class="poll-description clamp-2-lines">{{ $poll->description }}</p>
 
                         <div class="d-flex justify-content-between align-items-center mt-2">
                             <span class="poll-badge">
