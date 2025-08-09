@@ -32,3 +32,6 @@ Route::get('/polls/view/{public_id}', function ($public_id) {
 
 Route::get('/polls/category/{id}', [PollController::class, 'categoryPage'])->name('polls.byCategory');
 Route::get('/polls/user', [PollController::class, 'UserPollPage'])->name('polls.byUser');
+Route::get('ping', function () {
+    return 'Pong';
+})->name('ping');
