@@ -549,7 +549,7 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
+            <div class="col-12 col-md-12 col-lg-5">
                 <div class="card login-card shadow rounded-3">
                     <div class="login-header">
                         <div class="login-icon">
@@ -706,7 +706,7 @@
                         $('.login-card').css('animation', 'shake 0.6s ease-in-out');
                         setTimeout(() => {
                             $('.login-card').css('animation',
-                            'slideInUp 0.8s ease-out');
+                                'slideInUp 0.8s ease-out');
                         }, 600);
                     }
                 });

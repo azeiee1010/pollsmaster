@@ -551,7 +551,7 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
+            <div class="col-12 col-md-12 col-lg-5">
                 <div class="card register-card shadow rounded-3">
                     <div class="register-header">
                         <div class="register-icon">
