@@ -145,7 +145,7 @@
         .header-section {
             text-align: center;
             padding: 3rem 0;
-            margin-bottom: 3rem;
+            /* margin-bottom: 3rem; */
         }
 
         .main-title {
@@ -616,6 +616,198 @@
 
         /* Add Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        /* REPLACE YOUR EXISTING CAROUSEL CSS WITH THIS UPDATED VERSION */
+
+        /* Statistics Carousel Container */
+        .stats-carousel-container {
+            margin: 1rem 0 2rem 0;
+            /* Reduced top margin */
+            width: 100%;
+            position: relative;
+        }
+
+        /* Statistics Carousel */
+        .stats-carousel {
+            position: relative;
+            height: 160px;
+            /* Increased height to prevent cutting */
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .stats-slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stats-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stats-card {
+            padding: 1.8rem 2rem;
+            /* Reduced vertical padding slightly */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+        }
+
+        .stats-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .stats-card.total-polls::after {
+            background: var(--success-gradient);
+        }
+
+        .stats-card.total-votes::after {
+            background: var(--poll-gradient);
+        }
+
+        .stats-card.active-users::after {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #0891b2 100%);
+        }
+
+        .stats-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+            /* Reduced margin */
+            background: var(--poll-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: countUp 1s ease-out;
+            line-height: 1.1;
+            /* Tighter line height */
+        }
+
+        .stats-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            /* Slightly smaller */
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            /* Tighter line height */
+        }
+
+        .stats-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.2;
+            background: var(--poll-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Progress indicators - positioned right below the card */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            /* Reduced margin */
+            position: relative;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Responsive design for stats */
+        @media (max-width: 768px) {
+            .stats-number {
+                font-size: 2.5rem;
+            }
+
+            .stats-label {
+                font-size: 1rem;
+            }
+
+            .stats-carousel {
+                height: 140px;
+                /* Adjusted for mobile */
+            }
+
+            .stats-card {
+                padding: 1.5rem;
+            }
+
+            .stats-carousel-container {
+                margin: 0.5rem 0 1.5rem 0;
+                /* Less margin on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-number {
+                font-size: 2rem;
+            }
+
+            .stats-label {
+                font-size: 0.9rem;
+            }
+
+            .stats-carousel {
+                height: 120px;
+                /* Smaller height for small screens */
+            }
+
+            .stats-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .stats-icon {
+                font-size: 1.5rem;
+                top: 0.8rem;
+                right: 1rem;
+            }
+        }
     </style>
 @endsection
 
@@ -644,6 +836,53 @@
                 <i class="fas fa-vote-yea me-2"></i>
                 Want to create your own poll? <a href="/login"><i class="fas fa-sign-in-alt me-1"></i>Login</a> to get
                 started!
+            </div>
+        </div>
+
+
+        <!-- Statistics Carousel Section -->
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="stats-carousel-container">
+                    <div class="stats-carousel">
+                        <div class="stats-slide active">
+                            <div class="glass-card stats-card total-polls">
+                                <div class="stats-icon">
+                                    <i class="fas fa-poll-h"></i>
+                                </div>
+                                <div class="stats-number" data-target="{{ $totalPolls ?? 1247 }}">0</div>
+                                <div class="stats-label">Total Polls</div>
+                            </div>
+                        </div>
+
+                        <div class="stats-slide">
+                            <div class="glass-card stats-card total-votes">
+                                <div class="stats-icon">
+                                    <i class="fas fa-vote-yea"></i>
+                                </div>
+                                <div class="stats-number" data-target="{{ $totalVotes ?? 25691 }}">0</div>
+                                <div class="stats-label">Total Votes</div>
+                            </div>
+                        </div>
+
+                        <div class="stats-slide">
+                            <div class="glass-card stats-card active-users">
+                                <div class="stats-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stats-number" data-target="{{ $activeUsers ?? 8934 }}">0</div>
+                                <div class="stats-label">Active Users</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Indicators directly below the card -->
+                    <div class="carousel-indicators">
+                        <div class="indicator active" data-slide="0"></div>
+                        <div class="indicator" data-slide="1"></div>
+                        <div class="indicator" data-slide="2"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -841,5 +1080,100 @@
                 }
             );
         });
+
+        // Statistics carousel functionality
+        class StatsCarousel {
+            constructor() {
+                this.slides = document.querySelectorAll('.stats-slide');
+                this.indicators = document.querySelectorAll('.indicator');
+                this.currentSlide = 0;
+                this.intervalTime = 2000; // 2 seconds
+                this.interval = null;
+
+                if (this.slides.length > 0) {
+                    this.init();
+                }
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.startAutoSlide();
+                this.animateCurrentSlideNumbers();
+            }
+
+            setupEventListeners() {
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        this.goToSlide(index);
+                    });
+                });
+            }
+
+            goToSlide(index) {
+                // Remove active classes
+                this.slides[this.currentSlide].classList.remove('active');
+                this.indicators[this.currentSlide].classList.remove('active');
+
+                // Update current slide
+                this.currentSlide = index;
+
+                // Add active classes
+                this.slides[this.currentSlide].classList.add('active');
+                this.indicators[this.currentSlide].classList.add('active');
+
+                // Animate numbers for current slide
+                this.animateCurrentSlideNumbers();
+
+                // Restart auto slide
+                this.restartAutoSlide();
+            }
+
+            nextSlide() {
+                const nextIndex = (this.currentSlide + 1) % this.slides.length;
+                this.goToSlide(nextIndex);
+            }
+
+            startAutoSlide() {
+                this.interval = setInterval(() => {
+                    this.nextSlide();
+                }, this.intervalTime);
+            }
+
+            restartAutoSlide() {
+                clearInterval(this.interval);
+                this.startAutoSlide();
+            }
+
+            animateCurrentSlideNumbers() {
+                const activeSlide = this.slides[this.currentSlide];
+                const numberElement = activeSlide.querySelector('.stats-number');
+                const target = parseInt(numberElement.dataset.target);
+
+                this.animateNumber(numberElement, target);
+            }
+
+            animateNumber(element, target) {
+                const duration = 1000; // 1 second
+                const steps = 30;
+                const stepValue = target / steps;
+                const stepTime = duration / steps;
+                let current = 0;
+
+                element.textContent = '0';
+
+                const timer = setInterval(() => {
+                    current += stepValue;
+                    if (current >= target) {
+                        element.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, stepTime);
+            }
+        }
+
+        // Initialize stats carousel (add this line to your existing $(document).ready function)
+        new StatsCarousel();
     </script>
 @endpush
